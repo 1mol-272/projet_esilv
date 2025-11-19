@@ -90,15 +90,21 @@ This notebook is responsible for collecting and preparing the dataset used in th
      - `publisher`  
 
 6. **Data cleaning & type conversion**  
-   Use `re` and pandas string methods to:
+   a) To make the scraped text fields more consistent, we clean all string-like columns before extracting metrics:
+
+   - **Remove Wikipedia-style footnote markers** such as `[1]`, `[a]`, etc.
+   - **Normalize whitespace**: convert non-breaking spaces to normal spaces and collapse multiple spaces into one.
+   - **Remove special symbols** like `®` and `™`.
+   - **Strip leading and trailing spaces**.
+
+   b) Use `re` and pandas string methods to:
 
    - Extract numeric sales values from strings (for example `"82.90 million"` → `82.9`).  
    - Extract the release year from the date string (for example `"November 18, 2011"` → `2011`).  
 
-   Convert:
-
-   - `sales_millions` → `float`  
-   - `release_year` → `int`  
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convert:
+      - `sales_millions` → `float`  
+      - `release_year` → `int`  
 
 7. **Save the cleaned dataset**  
    Save the final DataFrame to a CSV file so it can be reused in the analysis notebook, for example:
